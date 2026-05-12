@@ -31,7 +31,7 @@ app.post("/run", async (req, res) => {
     const command = `
         cd ${dir} &&
         javac Main.java &&
-        timeout 5s java -Xmx64m Main
+        timeout 5s java -Xmx64m Main.java
     `;
 
     exec(command, (error, stdout, stderr) => {
