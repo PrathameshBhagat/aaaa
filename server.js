@@ -28,9 +28,9 @@ app.post("/run", async (req, res) => {
 
     fs.writeFileSync(javaFile, code);
 
+    // javac Main.java && ...............  remove .java too for other mode...
     const command = `
         cd ${dir} &&
-        javac Main.java &&
         timeout 5s java -Xmx64m Main.java
     `;
 
