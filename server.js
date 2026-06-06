@@ -11,7 +11,7 @@ app.use(express.json({ limit: "1mb" }));
 app.post("/run", async (req, res) => {
     const code = req.body.code;
 
-    console.log("Request " + req.body );
+    console.log("Request " + JSON.stringify(req.body) );
     
     console.log("Run called on port 3000");
     if (!code) {
