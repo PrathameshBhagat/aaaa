@@ -10,8 +10,6 @@ app.use(express.json({ limit: "1mb" }));
 
 app.post("/run", async (req, res) => {
     const code = req.body.code;
-
-    console.log("Request " + JSON.stringify(req.body) );
     
     console.log("Run called on port 3000");
     if (!code) {
@@ -30,16 +28,12 @@ app.post("/run", async (req, res) => {
 
     fs.writeFileSync(javaFile, code);
 
-console.log(
-  fs.readFileSync(javaFile, "utf8")
-);
     // javac Main.java && ...............  remove .java too for other mode...
     const command = `
         cd "${dir}" &&
         export LANG=C.UTF-8 &&
         export LC_ALL=C.UTF-8 &&
-        javac -encoding UTF-8 Main.java -d out &&
-        timeout 5s java -cp out -Dfile.encoding=UTF-8 Main
+        timeout 5s java -Xmx64m -Dfile.encoding=UTF-8 Main.java
     `;
 
     exec(command, (error, stdout, stderr) => {
