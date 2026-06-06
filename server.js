@@ -36,7 +36,8 @@ console.log(
     // javac Main.java && ...............  remove .java too for other mode...
     const command = `
         cd ${dir} &&
-        timeout 5s java -Xmx64m Main.java
+        timeout 5s javac -encoding UTF-8 Main.java &&
+        timeout 5s java -Xmx64m Main
     `;
 
     exec(command, (error, stdout, stderr) => {
