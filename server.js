@@ -37,7 +37,7 @@ console.log(
     const command = `
         cd ${dir} &&
         timeout 5s javac -encoding UTF-8 Main.java &&
-        timeout 5s java -Xmx64m Main
+        timeout 5s java -Xmx64m -Dfile.encoding=UTF-8 Main
     `;
 
     exec(command, (error, stdout, stderr) => {
