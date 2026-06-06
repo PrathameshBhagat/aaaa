@@ -52,7 +52,9 @@ console.log(
         if (error) {
             return res.json({
                 success: false,
-                stderr
+                error: error.message,
+                stderr,
+                stdout
             });
         }
 
