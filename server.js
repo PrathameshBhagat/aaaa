@@ -30,6 +30,9 @@ app.post("/run", async (req, res) => {
 
     fs.writeFileSync(javaFile, code);
 
+console.log(
+  fs.readFileSync(javaFile, "utf8")
+);
     // javac Main.java && ...............  remove .java too for other mode...
     const command = `
         cd ${dir} &&
