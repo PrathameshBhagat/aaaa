@@ -35,9 +35,11 @@ console.log(
 );
     // javac Main.java && ...............  remove .java too for other mode...
     const command = `
-        cd ${dir} &&
-        timeout 5s javac -encoding UTF-8 Main.java &&
-        timeout 5s java -Xmx64m -Dfile.encoding=UTF-8 Main
+        cd "${dir}" &&
+        export LANG=C.UTF-8 &&
+        export LC_ALL=C.UTF-8 &&
+        javac -encoding UTF-8 Main.java -d out &&
+        timeout 5s java -cp out -Dfile.encoding=UTF-8 Main
     `;
 
     exec(command, (error, stdout, stderr) => {
