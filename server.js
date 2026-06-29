@@ -3,8 +3,10 @@ const fs = require("fs");
 const path = require("path");
 const { exec } = require("child_process");
 const crypto = require("crypto");
+const Redis = require("ioredis");
 
 const app = express();
+const redis = new Redis();
 
 app.use(express.json({ limit: "1mb" }));
 
@@ -59,6 +61,22 @@ app.post("/run", async (req, res) => {
         });
     });
 });
+
+async function processCodeFromRedisContinously(){
+
+    console.log("Worker Started");
+
+    while(true){
+        
+        const [, data] = await redis.brpop("jobs", 0);
+
+        const job = JSON.parse(data);
+
+        console.log("Recieved Job from redis ID" + job.id );
+        
+    }
+    
+}
 
 app.listen(3000, () => {
     console.log("Server running on port 3000");
