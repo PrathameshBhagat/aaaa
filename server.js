@@ -72,7 +72,7 @@ async function processCodeFromRedisContinously(){
 
         const job = JSON.parse(data);
 
-        console.log("Recieved Job from redis ID" + job.id );
+        console.log("Recieved Job from redis ID" + job.ID );
         
     }
     
