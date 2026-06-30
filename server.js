@@ -6,7 +6,7 @@ const crypto = require("crypto");
 const Redis = require("ioredis");
 
 const app = express();
-const redis = new Redis();
+const redis = new Redis(process.env.REDIS_CONNECTION_STRING);
 
 app.use(express.json({ limit: "1mb" }));
 
@@ -80,4 +80,5 @@ async function processCodeFromRedisContinously(){
 
 app.listen(3000, () => {
     console.log("Server running on port 3000");
+    processCodeFromRedisContinously()
 });
