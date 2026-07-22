@@ -35,7 +35,7 @@ app.post("/run", async (req, res) => {
         cd "${dir}" &&
         export LANG=C.UTF-8 &&
         export LC_ALL=C.UTF-8 &&
-        timeout 5s java -Xmx64m -Dfile.encoding=UTF-8 Main.java
+        timeout 5s java -Xmx256m -Dfile.encoding=UTF-8 Main.java
     `;
 
     exec(command, (error, stdout, stderr) => {
@@ -49,6 +49,8 @@ app.post("/run", async (req, res) => {
             return res.json({
                 success: false,
                 error: error.message,
+                error_code: error.code,
+                error_signal: error.signal,
                 stderr,
                 stdout
             });
