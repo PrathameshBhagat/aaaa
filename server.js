@@ -7,13 +7,15 @@ const Redis = require("ioredis");
 
 const app = express();
 const redis = new Redis(process.env.REDIS_CONNECTION_STRING);
+const PORT = process.env.PORT || 3000;
+
 
 app.use(express.json({ limit: "1mb" }));
 
 app.post("/run", async (req, res) => {
     const code = req.body.code;
     
-    console.log("Run called on port 3000");
+    console.log(`Run called on port ${PORT}`);
     if (!code) {
         return res.status(400).json({
             error: "No code provided"
@@ -80,9 +82,7 @@ async function processCodeFromRedisContinously(){
     
 }
 
-const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
-    console.log("Server running on port &{PORT}");
+    console.log(`Server running on port ${PORT}`);
     processCodeFromRedisContinously()
 });
