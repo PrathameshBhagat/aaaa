@@ -103,6 +103,7 @@ async function processCodeFromRedisContinously(){
             const job = JSON.parse(data);
 
             console.log("Recieved Job from redis ID" + job.ID );
+            console.log("Code" + job.code );
 
             const output = await executeCode(job.code);
 
